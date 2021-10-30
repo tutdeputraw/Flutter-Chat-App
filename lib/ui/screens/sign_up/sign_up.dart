@@ -46,7 +46,7 @@ class SignUp extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () => signUp.signUp(),
+                  onPressed: () => signUp.signUp(context),
                   child: const Text('SIGN UP'),
                 ),
               ],

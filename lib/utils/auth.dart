@@ -12,18 +12,20 @@ class AuthMethod {
       final user = result.user;
       return UserModel(userId: user!.uid);
     } catch (e) {
-      print(e.toString());
+      return AuthExceptionHandler.handleException(e);
     }
   }
 
   Future signUpWithEmailAndPassword(final email, final password) async {
     try {
-      UserCredential result = await _firebaseAuth
-          .createUserWithEmailAndPassword(email: email, password: password);
+      final result = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       final user = result.user;
       return UserModel(userId: user!.uid);
     } catch (e) {
-      print(e.toString());
+      return AuthExceptionHandler.handleException(e);
     }
   }
 
@@ -31,7 +33,7 @@ class AuthMethod {
     try {
       return await _firebaseAuth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      print(e.toString());
+      return AuthExceptionHandler.handleException(e);
     }
   }
 
@@ -39,7 +41,7 @@ class AuthMethod {
     try {
       return await _firebaseAuth.signOut();
     } catch (e) {
-      print(e.toString());
+      return AuthExceptionHandler.handleException(e);
     }
   }
 }

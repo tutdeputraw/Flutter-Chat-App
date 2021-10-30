@@ -5,20 +5,21 @@ class SignUpProvider with ChangeNotifier {
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
 
-  TextEditingController get username => _username;
-
-  void signUp() {
-    print(username.text);
-    print(password.text);
-    print(email.text);
-    
+  void signUp(context) {
     AuthMethod authMethod = new AuthMethod();
-    authMethod
-        .signUpWithEmailAndPassword(email.text, password.text)
-        .then((value) {
-      print(value);
-    });
+    authMethod.signUpWithEmailAndPassword(email.text, password.text).then(
+      (value) {
+        if (value.runtimeType == String) {
+          CustomSnackBar(context).showSnackbar(value);
+        } else {
+          print("TYPE: " + value.runtimeType.toString());
+          print('SUCCESS: ' + value);
+        }
+      },
+    );
   }
+
+  TextEditingController get username => _username;
 
   set username(TextEditingController value) {
     _username = value;
