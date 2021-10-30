@@ -6,52 +6,52 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          AppBarWidget(
-            key: const ValueKey('sign in appbar'),
-            title: 'Sign In',
-            centerTitle: true,
-          ),
-          Expanded(
-            child: _body,
-          ),
-        ],
+      appBar: AppBar(
+        title: const Text('SIGN IN'),
+        centerTitle: true,
       ),
-    );
-  }
-
-  Widget get _body {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Username',
-              border: OutlineInputBorder(),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Consumer<SignInProvider>(
+            builder: (context, signIn, _) => Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFormField(
+                  controller: signIn.email,
+                  decoration: InputDecoration(
+                    labelText: 'Username',
+                    errorText: signIn.errorEmail ? 'username invalid' : null,
+                    border: const OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: signIn.password,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    errorText: signIn.errorEmail ? 'password invalid' : null,
+                    border: const OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () => signIn.signIn(),
+                  child: const Text('SIGN IN'),
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignUp(),
+                    ),
+                  ),
+                  child: const Text('SIGN UP'),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 16),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Password',
-              border: OutlineInputBorder(),
-            ),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Sign In'),
-          ),
-          // const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Sign Up'),
-          ),
-        ],
+        ),
       ),
     );
   }
