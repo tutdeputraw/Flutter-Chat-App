@@ -5,17 +5,15 @@ class SignUpProvider with ChangeNotifier {
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
 
+  SignUpProvider() {
+    print('SignUpProvider');
+  }
+
   void signUp(context) {
-    AuthMethod authMethod = new AuthMethod();
-    authMethod.signUpWithEmailAndPassword(email.text, password.text).then(
-      (value) {
-        if (value.runtimeType == String) {
-          CustomSnackBar(context).showSnackbar(value);
-        } else {
-          print("TYPE: " + value.runtimeType.toString());
-          print('SUCCESS: ' + value);
-        }
-      },
+    SignUpHelper(context).userSignUp(
+      username.text,
+      email.text,
+      password.text,
     );
   }
 

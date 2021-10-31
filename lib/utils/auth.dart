@@ -10,7 +10,7 @@ class AuthMethod {
         password: password,
       );
       final user = result.user;
-      return UserModel(userId: user!.uid);
+      return UserModel(id: user!.uid);
     } catch (e) {
       return AuthExceptionHandler.handleException(e);
     }
@@ -23,7 +23,7 @@ class AuthMethod {
         password: password,
       );
       final user = result.user;
-      return UserModel(userId: user!.uid);
+      return UserModel(id: user!.uid);
     } catch (e) {
       return AuthExceptionHandler.handleException(e);
     }

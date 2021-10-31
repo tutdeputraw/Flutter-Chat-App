@@ -6,16 +6,15 @@ class SignInProvider with ChangeNotifier {
   bool _errorEmail = false;
   bool _errorPassword = false;
 
-  void signIn() {
-    if (email.text != 'halo') {
-      errorEmail = true;
-    }
-    if (password.text != 'halo') {
-      errorPassword = true;
-    } else {
-      errorEmail = false;
-      errorPassword = false;
-    }
+  SignInProvider(){
+    print("SignInProvider");
+  }
+
+  void signIn(context) {
+    SignInHelper(context).userSignIn(
+      email.text,
+      password.text,
+    );
   }
 
   bool get errorEmail => _errorEmail;

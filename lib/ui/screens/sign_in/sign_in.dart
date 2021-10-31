@@ -14,29 +14,29 @@ class SignIn extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           child: Consumer<SignInProvider>(
-            builder: (context, signIn, _) => Column(
+            builder: (context, provider, _) => Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
-                  controller: signIn.email,
+                  controller: provider.email,
                   decoration: InputDecoration(
                     labelText: 'Username',
-                    errorText: signIn.errorEmail ? 'username invalid' : null,
+                    errorText: provider.errorEmail ? 'username invalid' : null,
                     border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
-                  controller: signIn.password,
+                  controller: provider.password,
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    errorText: signIn.errorEmail ? 'password invalid' : null,
+                    errorText: provider.errorEmail ? 'password invalid' : null,
                     border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () => signIn.signIn(),
+                  onPressed: () => provider.signIn(context),
                   child: const Text('SIGN IN'),
                 ),
                 ElevatedButton(

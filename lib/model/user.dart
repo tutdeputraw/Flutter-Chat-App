@@ -1,9 +1,9 @@
 part of 'model.dart';
 
 class UserModel {
-  String userId;
+  String id;
 
   UserModel({
-    required this.userId,
+    required this.id,
   });
 }

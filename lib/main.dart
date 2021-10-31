@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/provider/provider.dart';
 import 'package:flutter_chat_app/ui/screens/screens.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_chat_app/ui/widgets/widgets.dart';
 
 void main() {
   init();
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => SignInProvider()),
         ChangeNotifierProvider(create: (_) => SignUpProvider()),
+        ChangeNotifierProvider(create: (_) => StateProvider()),
+        ChangeNotifierProvider(create: (_) => BottomNavigationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -30,7 +33,21 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SignIn(),
+        home: Scaffold(
+          body: Consumer<StateProvider>(builder: (context, provider, _) {
+            if (provider.getAppState != null) {
+              switch (provider.getAppState) {
+                case state.authorize:
+                  return const HomePage();
+                case state.unauthorize:
+                  return const SignIn();
+                default:
+                  CustomSnackBar(context).showSnackbar('ERROR');
+              }
+            }
+            return Center(child: CircularProgressIndicator());
+          }),
+        ),
       ),
     );
   }

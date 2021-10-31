@@ -18,11 +18,11 @@ class SignUp extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           child: Consumer<SignUpProvider>(
-            builder: (context, signUp, _) => Column(
+            builder: (context, provider, _) => Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
-                  controller: signUp.username,
+                  controller: provider.username,
                   decoration: const InputDecoration(
                     labelText: 'Username',
                     border: OutlineInputBorder(),
@@ -30,7 +30,7 @@ class SignUp extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
-                  controller: signUp.email,
+                  controller: provider.email,
                   decoration: const InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(),
@@ -38,7 +38,7 @@ class SignUp extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
-                  controller: signUp.password,
+                  controller: provider.password,
                   decoration: const InputDecoration(
                     labelText: 'Password',
                     border: OutlineInputBorder(),
@@ -46,7 +46,7 @@ class SignUp extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () => signUp.signUp(context),
+                  onPressed: () => provider.signUp(context),
                   child: const Text('SIGN UP'),
                 ),
               ],
